@@ -24,7 +24,7 @@ Filen `CLAUDE.md` i projektets rod læses automatisk af Claude Code ved opstart.
 - Kodestandarder og konventioner
 - Nøglekommandoer
 
-**Skabelon:** [`templates/CLAUDE.md`](../templates/CLAUDE.md)
+**Skabelon:** [`templates/CLAUDE.md`](https://github.com/qvisty/mit-claude-setup/blob/main/templates/CLAUDE.md)
 
 ### settings.json
 `.claude/settings.json` styrer tilladelser og hooks:
@@ -37,12 +37,12 @@ Filen `CLAUDE.md` i projektets rod læses automatisk af Claude Code ved opstart.
 }
 ```
 
-**Skabelon:** [`templates/settings.json`](../templates/settings.json)
+**Skabelon:** [`templates/settings.json`](https://github.com/qvisty/mit-claude-setup/blob/main/templates/settings.json)
 
 ### Agents / Subagents
 Claude Code kan spawne specialiserede subagents med `Agent`-toolet. Definer roller i `.claude/agents.md`.
 
-**Skabelon:** [`templates/agents.md`](../templates/agents.md)
+**Skabelon:** [`templates/agents.md`](https://github.com/qvisty/mit-claude-setup/blob/main/templates/agents.md)
 
 ## Nyttige slash-kommandoer
 

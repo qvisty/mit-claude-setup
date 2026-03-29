@@ -14,11 +14,13 @@ permalinks:
 nav_links:
   - title: Hjem
     url: /
+  - title: Til mig selv
+    url: /docs/til-mig-selv
+  - title: Unified Setup
+    url: /docs/unified-setup
   - title: Claude Code
     url: /docs/claude-code
   - title: Codex
     url: /docs/codex
   - title: Arbejdsgange
     url: /docs/workflows
-  - title: Templates
-    url: /templates
