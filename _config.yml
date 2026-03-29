@@ -1,0 +1,24 @@
+title: Mit Claude & Codex Setup
+description: Konfigurationer, skabeloner og arbejdsgange med Claude Code og OpenAI Codex
+theme: minima
+lang: da
+
+author:
+  name: qvisty
+
+show_excerpts: true
+
+permalinks:
+  posts: /blog/:year/:month/:day/:title/
+
+nav_links:
+  - title: Hjem
+    url: /
+  - title: Claude Code
+    url: /docs/claude-code
+  - title: Codex
+    url: /docs/codex
+  - title: Arbejdsgange
+    url: /docs/workflows
+  - title: Templates
+    url: /templates
