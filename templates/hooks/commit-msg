@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Git commit-msg hook
+# Validerer at commit-beskeder er menneskelig læselige
+# Installer: cp .claude/hooks/commit-msg .git/hooks/commit-msg && chmod +x .git/hooks/commit-msg
+
+MSG_FILE="$1"
+MSG=$(cat "$MSG_FILE")
+
+# Spring merge commits over
+if echo "$MSG" | grep -qE '^Merge (branch|pull request)'; then
+  exit 0
+fi
+
+# Spring fixup/squash commits over
+if echo "$MSG" | grep -qE '^(fixup|squash)!'; then
+  exit 0
+fi
+
+# Tjek minimum længde (mindst 10 tegn)
+FIRST_LINE=$(echo "$MSG" | head -1)
+LENGTH=${#FIRST_LINE}
+
+if [ "$LENGTH" -lt 10 ]; then
+  echo "" >&2
+  echo "❌ Commit-besked for kort (${LENGTH} tegn)." >&2
+  echo "" >&2
+  echo "Skriv en forklarende besked, f.eks.:" >&2
+  echo "  feat: tilføj login med Google OAuth" >&2
+  echo "  fix: ret crash når kurven er tom" >&2
+  echo "  refactor: opdel stor komponent i tre dele" >&2
+  echo "" >&2
+  exit 1
+fi
+
+# Advar mod vage beskeder
+VAGUE_PATTERNS="^(fix|update|changes|wip|misc|stuff|test|asdf|temp|tmp|quick fix|minor)$"
+LOWER=$(echo "$FIRST_LINE" | tr '[:upper:]' '[:lower:]' | sed 's/^[a-z]*: //')
+
+if echo "$LOWER" | grep -qiE "$VAGUE_PATTERNS"; then
+  echo "" >&2
+  echo "⚠️ Commit-besked er for vag: \"$FIRST_LINE\"" >&2
+  echo "" >&2
+  echo "Vær mere specifik. Hvad ændrede du og hvorfor?" >&2
+  echo "  feat: tilføj login med Google OAuth" >&2
+  echo "  fix: ret crash når kurven er tom" >&2
+  echo "" >&2
+  exit 1
+fi
+
+exit 0
