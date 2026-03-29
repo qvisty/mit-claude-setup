@@ -1,121 +1,58 @@
 # CLAUDE.md
 
 <!--
-  MASTER FIL — Single source of truth for alle AI-tools.
-  Læses af: Claude Code, GSD, Superpowers, MCP Codex
-  Synces til: AGENTS.md (Codex CLI) via `bash sync.sh`
-  Opdater KUN denne fil — kør derefter sync.sh
+  Claude Code-specifik konfiguration.
+  Importerer den universelle protokol via @-direktiver.
+  Rediger AGENTS.md for regler der gælder alle agenter.
+  Rediger denne fil KUN for Claude Code-specifikke indstillinger.
 -->
 
-## Projekt
+@AGENTS.md
+@.planning/PROJECT.md
+@.planning/STATE.md
 
-<!-- Beskriv projektet i 2-3 sætninger -->
-**Navn:** 
-**Formål:** 
-**Stack:** 
+---
 
-## Arkitektur
+## Claude Code — specifikke indstillinger
 
-<!-- Kort beskrivelse af mappestruktur og nøglemoduler -->
-```
-project/
-├── src/
-├── tests/
-└── ...
-```
-
-## Nøglekommandoer
-
-```bash
-# Installer
-npm install
-
-# Test
-npm test
-
-# Byg
-npm run build
-
-# Lint
-npm run lint
-
-# Sync AI-konfigurationsfiler
-bash sync.sh
-
-# Sync TODOs til GitHub Issues
-python3 .claude/hooks/todo-github-sync.py
-```
-
-## Kodestil og konventioner
-
-- **Sprog:** TypeScript / Python / andet
-- **Formatter:** Prettier / Black — kør automatisk
-- **Linter:** ESLint / Ruff
-- **Testframework:** Jest / pytest
-- **Sprog i kode og kommentarer:** Engelsk
-
-## Commit-beskeder (VIGTIGT)
-
-Skriv ALTID commit-beskeder i naturligt, forståeligt sprog der forklarer hvad og hvorfor.
-Format: `type: kort beskrivelse der giver mening for et menneske`
-
-**Gode eksempler:**
-```
-feat: tilføj login med Google OAuth
-fix: ret crash når kurven er tom ved checkout
-refactor: opdel 400-linje komponent i tre dele
-chore: opdater afhængigheder til nyeste versioner
-docs: tilføj setup-vejledning til README
-```
-
-**Brug ALDRIG:**
-```
-fix bug
-update files
-changes
-WIP
-feat: implement module  ← for teknisk/vagt
-```
-
-Claude committer automatisk i dette format. Én commit pr. logisk ændring.
-
-## GitHub Issues og TODOs
-
-TODO-kommentarer i koden synces automatisk til GitHub Issues via `.claude/hooks/todo-github-sync.py`.
-
-Format der fanges: `// TODO: beskrivelse` eller `# TODO: beskrivelse`
-
-Når en TODO fjernes fra koden, lukkes det tilsvarende issue automatisk.
-
-Kør manuelt: `python3 .claude/hooks/todo-github-sync.py`
-
-## Tilladte handlinger (ingen spørgsmål)
+### Tilladte handlinger (ingen spørgsmål)
 
 - Redigere filer i `src/` og `tests/`
 - Køre tests, lint og build
 - Oprette commits og branches
 - Oprette nye filer i eksisterende mapper
-- Synce TODO-issues
+- Synce TODO-issues: `python3 .claude/hooks/todo-github-sync.py`
+- Køre validering: `bash sync.sh`
 
-## Kræver altid godkendelse
+### Kræver altid godkendelse
 
 - Slette filer eller mapper
-- Push til remote
+- `git push` (medmindre tests er grønne og vi ikke er i rød TDD-fase)
 - Ændre afhængigheder (`package.json`, `pyproject.toml`)
 - Deployment eller infrastrukturændringer
 - `git reset --hard` eller andre destruktive git-operationer
 
-## AI-tool setup
+### GSD-integration
 
-Dette projekt bruger qvisty's standardsetup:
+Dette projekt understøtter GSD workflow:
+- Brug `gsd:plan-phase` til planlægning (ikke shell-kommandoer)
+- Brug `gsd:execute-phase` til eksekvering
+- Brug `gsd:verify-work` til verificering
+- Brug `gsd:progress` for overblik hvis du er i tvivl om status
+
+### Superpowers-integration
+
+Superpowers skills aktiveres automatisk ved behov.
+Skills har forrang: `brainstorming` → `writing-plans` → `test-driven-development` → `requesting-code-review`
+
+### Subagents
+
+Se `.claude/agents.md` for tilgængelige subagent-roller.
+
+---
+
+## Setup-reference
+
 - Repo: <https://github.com/qvisty/mit-claude-setup>
 - Installer: `curl -fsSL https://raw.githubusercontent.com/qvisty/mit-claude-setup/main/install.sh | bash`
-
-Konfigurationsfiler i dette projekt:
-| Fil | Læses af |
-|-----|----------|
-| `CLAUDE.md` (denne fil) | Claude Code, GSD, Superpowers, MCP Codex |
-| `AGENTS.md` | Codex CLI |
-| `RALPH.md` | Ralphify |
-| `.claude/agents.md` | Claude Code subagents |
-| `.claude/settings.json` | Claude Code hooks og tilladelser |
+- Valider setup: `bash sync.sh`
