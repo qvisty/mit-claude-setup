@@ -1,6 +1,4 @@
 {
-  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/settings.schema.json",
-
   "permissions": {
     "allow": [
       "Bash(git status)",
@@ -8,25 +6,33 @@
       "Bash(git log*)",
       "Bash(git add*)",
       "Bash(git commit*)",
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git fetch*)",
+      "Bash(git stash*)",
       "Bash(npm test*)",
       "Bash(npm run lint*)",
-      "Bash(npm run build*)"
+      "Bash(npm run build*)",
+      "Bash(npm install)",
+      "Bash(python3 .claude/hooks/todo-github-sync.py*)",
+      "Bash(bash sync.sh*)"
     ],
     "deny": [
       "Bash(git push --force*)",
       "Bash(git reset --hard*)",
-      "Bash(rm -rf*)"
+      "Bash(rm -rf*)",
+      "Bash(git push origin main*)",
+      "Bash(git push origin master*)"
     ]
   },
-
   "hooks": {
-    "PreToolUse": [
+    "PostToolUse": [
       {
         "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "echo '[hook] Bash: '\"$CLAUDE_TOOL_INPUT\""
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -q 'git commit'; then python3 .claude/hooks/todo-github-sync.py 2>/dev/null || true; fi"
           }
         ]
       }

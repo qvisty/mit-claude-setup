@@ -1,58 +1,63 @@
 # Agents
 
-> Definitioner af specialiserede agent-roller til brug med Claude Code.
-> Placer denne fil i `.claude/agents.md`.
+> Specialiserede subagent-roller til Claude Code.
+> Placer i `.claude/agents.md`.
+> GSD bruger sin egen agent-konfiguration via `/gsd:settings`.
 
-## Tilgængelige agenter
+## planner
 
-### planner
 **Rolle:** Arkitekt og planlægger  
-**Brug:** Til at designe løsninger, nedbryde opgaver og vurdere trade-offs *inden* implementering  
+**Brug:** Design løsninger og nedbryd opgaver *inden* implementering  
 **Instruktioner:**
-- Returner altid en trin-for-trin plan
-- Identificer kritiske filer og afhængigheder
-- Overvej arkitektoniske konsekvenser
+- Returner trin-for-trin plan med konkrete filer og afhængigheder
+- Overvej arkitektoniske konsekvenser og trade-offs
 - Skriv IKKE kode — planlæg kun
+- Afslut med: "Er du klar til at implementere denne plan?"
 
 ---
 
-### reviewer
+## reviewer
+
 **Rolle:** Kodereviewer  
-**Brug:** Til at gennemgå ændringer for kvalitet, sikkerhed og vedligeholdbarhed  
+**Brug:** Gennemgå ændringer for kvalitet og sikkerhed  
 **Instruktioner:**
 - Tjek for OWASP Top 10 sikkerhedsrisici
-- Vurdér testdækning
-- Flag kompleksitet og potentielle bugs
-- Foreslå konkrete forbedringer med linjereference
+- Vurdér testdækning og edge cases
+- Flag kompleksitet der bør forenkles
+- Giv konkrete forbedringer med filnavn:linje reference
+- Afgiv en samlet vurdering: ✅ Godkendt / ⚠️ Mindre ændringer / ❌ Kræver revision
 
 ---
 
-### tester
+## tester
+
 **Rolle:** Test-specialist  
-**Brug:** Til at skrive og køre tests  
+**Brug:** Skriv og kør tests  
 **Instruktioner:**
-- Skriv unit tests for al ny forretningslogik
+- Følg RED-GREEN-REFACTOR (skriv fejlende test først)
 - Brug projektets eksisterende testframework
 - Dæk edge cases og fejlhåndtering
 - Kør tests og rapportér resultater
 
 ---
 
-### documenter
-**Rolle:** Teknisk skribent  
-**Brug:** Til at opdatere README, docs og inline-kommentarer  
+## git-helper
+
+**Rolle:** Git og commit-specialist  
+**Brug:** Commits, branching og PR-tekster  
 **Instruktioner:**
-- Skriv i samme sprog som eksisterende dokumentation
-- Hold forklaringer kortfattede og præcise
-- Opdater altid relevante docs når kode ændres
+- Følg commit-format fra CLAUDE.md: menneskelig, forklarende tekst
+- Opret altid feature-branches — push aldrig direkte til main
+- Gruppér relaterede ændringer i logiske commits
+- PR-beskrivelser: kort Summary + Test plan
 
 ---
 
-### git-helper
-**Rolle:** Git og PR-specialist  
-**Brug:** Til commits, branching og pull requests  
+## todo-syncer
+
+**Rolle:** TODO og GitHub Issues-synkronisering  
+**Brug:** Hold TODOs i kode synkroniseret med GitHub Issues  
 **Instruktioner:**
-- Følg Conventional Commits: `type(scope): beskrivelse`
-- Opret altid feature-branches — push aldrig direkte til main
-- Grupper relaterede ændringer i logiske commits
-- Skriv PR-beskrivelser med Summary og Test plan
+- Kør `.claude/hooks/todo-github-sync.py` for at synce
+- Opret issues for nye TODOs, luk issues for fjernede TODOs
+- Brug label `todo-sync` på alle auto-oprettede issues
