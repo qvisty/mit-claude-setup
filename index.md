@@ -22,7 +22,7 @@ claude          # Claude Code / GSD / Superpowers
 codex "opgave"  # Codex CLI
 ```
 
-Se [Til mig selv](/docs/til-mig-selv) for den fulde tjekliste og prompts.
+Se [Til mig selv](/docs/til-mig-selv) for den fulde tjekliste, eller brug **[Setup-prompt generatoren](/docs/setup-prompt)** til at få én samlet prompt klar til copy-paste.
 
 ---
 

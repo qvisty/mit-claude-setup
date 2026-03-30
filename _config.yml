@@ -22,5 +22,7 @@ nav_links:
     url: /docs/claude-code
   - title: Codex
     url: /docs/codex
+  - title: Setup-prompt
+    url: /docs/setup-prompt
   - title: Arbejdsgange
     url: /docs/workflows
