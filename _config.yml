@@ -14,15 +14,21 @@ permalinks:
 nav_links:
   - title: Hjem
     url: /
-  - title: Til mig selv
-    url: /docs/til-mig-selv
-  - title: Unified Setup
-    url: /docs/unified-setup
+  - title: Installation
+    url: /docs/installation
+  - title: Setup-prompt
+    url: /docs/setup-prompt
+  - title: Filer og sammenhæng
+    url: /docs/filer-og-sammenhaeng
+  - title: GSD
+    url: /docs/gsd
+  - title: Superpowers
+    url: /docs/superpowers
+  - title: Ralph
+    url: /docs/ralph
   - title: Claude Code
     url: /docs/claude-code
   - title: Codex
     url: /docs/codex
-  - title: Setup-prompt
-    url: /docs/setup-prompt
   - title: Arbejdsgange
     url: /docs/workflows

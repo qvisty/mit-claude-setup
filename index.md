@@ -8,21 +8,18 @@ Velkommen til min personlige reference for [Claude Code](https://claude.ai/code)
 ## Quick Start — nyt projekt på 60 sekunder
 
 ```bash
-# 1. Hent setup
+# 1. Opret projekt og hent setup
+mkdir my-project && cd my-project
+git init
 curl -fsSL https://raw.githubusercontent.com/qvisty/mit-claude-setup/main/install.sh | bash
 
-# 2. Udfyld CLAUDE.md med dit projekts detaljer
-claude  # bed Claude om at hjælpe med at udfylde
-
-# 3. Sync til AGENTS.md (til Codex CLI)
-bash sync.sh
-
-# 4. Kør dit foretrukne tool
-claude          # Claude Code / GSD / Superpowers
-codex "opgave"  # Codex CLI
+# 2. Start Claude Code og bed ham udfylde konfigurationen
+claude
 ```
 
-Se [Til mig selv](/docs/til-mig-selv) for den fulde tjekliste, eller brug **[Setup-prompt generatoren](/docs/setup-prompt)** til at få én samlet prompt klar til copy-paste.
+Eller brug den [færdige setup-prompt](/docs/setup-prompt) — kopiér den direkte ind i Claude Code og alt sættes op for dig.
+
+Se [Installation](/docs/installation) for den fulde trin-for-trin guide.
 
 ---
 
@@ -36,8 +33,12 @@ Dette repo fungerer som:
 
 ## Sektioner
 
-- [Til mig selv](docs/til-mig-selv) — tjekliste, prompts og workflow til nye projekter
-- [Unified Setup](docs/unified-setup) — alle tools, én konfiguration
-- [Claude Code guide](docs/claude-code) — arbejde med Claude Code CLI
-- [Codex guide](docs/codex) — arbejde med OpenAI Codex
-- [Arbejdsgange](docs/workflows) — mine typiske flows og mønstre
+- [Installation](/docs/installation) — fra tomt projekt til fuldt setup
+- [Setup-prompt](/docs/setup-prompt) — én prompt, klar til copy-paste
+- [Filer og sammenhæng](/docs/filer-og-sammenhaeng) — hvordan MD-filerne hænger sammen
+- [GSD (Get Shit Done)](/docs/gsd) — fasebaseret workflow-system
+- [Superpowers](/docs/superpowers) — automatiske skills i Claude Code
+- [Ralph](/docs/ralph) — fire-and-forget agent via Ralphify
+- [Claude Code](/docs/claude-code) — arbejde med Claude Code CLI
+- [Codex](/docs/codex) — arbejde med OpenAI Codex
+- [Arbejdsgange](/docs/workflows) — mine typiske flows og mønstre
