@@ -96,7 +96,7 @@ Superpowers arver milestone-integrationen fra det fælles setup:
 - **TODO-sync:** Når Superpowers skriver `TODO:`-kommentarer under TDD, oprettes issues automatisk og tildeles den aktive milestone
 - **Fasesporing:** Milestone-progress viser automatisk hvor langt fasen er
 
-Se [Filer og sammenhæng](/docs/filer-og-sammenhaeng#synkronisering-med-github) for det fulde overblik.
+Se [Filer og sammenhæng]({{ site.baseurl }}/docs/filer-og-sammenhaeng#synkronisering-med-github) for det fulde overblik.
 
 ## Tips
 

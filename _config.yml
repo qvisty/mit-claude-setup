@@ -1,5 +1,7 @@
 title: Mit Claude & Codex Setup
 description: Konfigurationer, skabeloner og arbejdsgange med Claude Code og OpenAI Codex
+baseurl: /mit-claude-setup
+url: https://qvisty.github.io
 theme: minima
 lang: da
 
@@ -11,22 +13,12 @@ show_excerpts: true
 permalinks:
   posts: /blog/:year/:month/:day/:title/
 
-nav_links:
-  - title: Hjem
-    url: /
-  - title: Installation
-    url: /docs/installation
-  - title: Setup-prompt
-    url: /docs/setup-prompt
-  - title: Filer og sammenhæng
-    url: /docs/filer-og-sammenhaeng
-  - title: GSD
-    url: /docs/gsd
-  - title: Superpowers
-    url: /docs/superpowers
-  - title: Ralph
-    url: /docs/ralph
-  - title: Claude Code
-    url: /docs/claude-code
-  - title: Codex
-    url: /docs/codex
+header_pages:
+  - docs/installation.md
+  - docs/setup-prompt.md
+  - docs/filer-og-sammenhaeng.md
+  - docs/gsd.md
+  - docs/superpowers.md
+  - docs/ralph.md
+  - docs/claude-code.md
+  - docs/codex.md

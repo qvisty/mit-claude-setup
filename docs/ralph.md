@@ -79,7 +79,7 @@ Ralph bruger GitHub Milestones til fasesporing:
 - **TODO-sync:** Når Ralph skriver `TODO:`-kommentarer, oprettes issues automatisk og tildeles den aktive milestone
 - **Fasesporing:** Når en fase er færdig, lukker Ralph milestone (se AGENTS.md sektion 6 og "Når en hel fase er færdig" i RALPH.md)
 
-Se [Filer og sammenhæng](/docs/filer-og-sammenhaeng#synkronisering-med-github) for det fulde overblik.
+Se [Filer og sammenhæng]({{ site.baseurl }}/docs/filer-og-sammenhaeng#synkronisering-med-github) for det fulde overblik.
 
 ## Ralphs begrænsninger
 

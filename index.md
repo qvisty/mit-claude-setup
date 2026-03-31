@@ -17,9 +17,9 @@ curl -fsSL https://raw.githubusercontent.com/qvisty/mit-claude-setup/main/instal
 claude
 ```
 
-Eller brug den [færdige setup-prompt](/docs/setup-prompt) — kopiér den direkte ind i Claude Code og alt sættes op for dig.
+Eller brug den [færdige setup-prompt]({{ site.baseurl }}/docs/setup-prompt) — kopiér den direkte ind i Claude Code og alt sættes op for dig.
 
-Se [Installation](/docs/installation) for den fulde trin-for-trin guide.
+Se [Installation]({{ site.baseurl }}/docs/installation) for den fulde trin-for-trin guide.
 
 ---
 
@@ -33,11 +33,11 @@ Dette repo fungerer som:
 
 ## Sektioner
 
-- [Installation](/docs/installation) — fra tomt projekt til fuldt setup
-- [Setup-prompt](/docs/setup-prompt) — én prompt, klar til copy-paste
-- [Filer og sammenhæng](/docs/filer-og-sammenhaeng) — hvordan MD-filerne hænger sammen
-- [GSD (Get Shit Done)](/docs/gsd) — fasebaseret workflow-system
-- [Superpowers](/docs/superpowers) — automatiske skills i Claude Code
-- [Ralph](/docs/ralph) — fire-and-forget agent via Ralphify
-- [Claude Code](/docs/claude-code) — arbejde med Claude Code CLI
-- [Codex](/docs/codex) — arbejde med OpenAI Codex
+- [Installation]({{ site.baseurl }}/docs/installation) — fra tomt projekt til fuldt setup
+- [Setup-prompt]({{ site.baseurl }}/docs/setup-prompt) — én prompt, klar til copy-paste
+- [Filer og sammenhæng]({{ site.baseurl }}/docs/filer-og-sammenhaeng) — hvordan MD-filerne hænger sammen
+- [GSD (Get Shit Done)]({{ site.baseurl }}/docs/gsd) — fasebaseret workflow-system
+- [Superpowers]({{ site.baseurl }}/docs/superpowers) — automatiske skills i Claude Code
+- [Ralph]({{ site.baseurl }}/docs/ralph) — fire-and-forget agent via Ralphify
+- [Claude Code]({{ site.baseurl }}/docs/claude-code) — arbejde med Claude Code CLI
+- [Codex]({{ site.baseurl }}/docs/codex) — arbejde med OpenAI Codex

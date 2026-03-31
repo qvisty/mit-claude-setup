@@ -91,7 +91,7 @@ GSD bruger GitHub Milestones til fasesporing (se AGENTS.md sektion 6):
 - **Under fasen:** Issues lukkes efterhånden som tasks færdiggøres — milestone-progress opdateres automatisk
 - **Fase-afslutning:** Luk milestone når alle issues er lukkede
 
-TODO-kommentarer i koden oprettes automatisk som issues tildelt den aktive milestone. Se [Filer og sammenhæng](/docs/filer-og-sammenhaeng#synkronisering-med-github) for detaljer.
+TODO-kommentarer i koden oprettes automatisk som issues tildelt den aktive milestone. Se [Filer og sammenhæng]({{ site.baseurl }}/docs/filer-og-sammenhaeng#synkronisering-med-github) for detaljer.
 
 ## GSD i CLAUDE.md
 
