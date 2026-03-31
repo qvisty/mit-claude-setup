@@ -34,8 +34,8 @@ npx biome check .
 
 <!--
   Ralphs lokale task-liste.
-  Individuelle tasks spores her — ikke som GitHub Issues.
-  GitHub Issues bruges kun på faseniveau (se AGENTS.md sektion 6).
+  Tasks spores også som GitHub Issues tilknyttet fasens milestone.
+  Se AGENTS.md sektion 6 for milestones og issues.
 -->
 
 - [ ] <!-- task 1 -->
@@ -59,7 +59,7 @@ Se AGENTS.md sektion 9 (Definition of Done) for den fulde tjekliste.
 Derudover:
 1. Opdatér `.planning/STATE.md` med ny fasestatus og `Resume file:`
 2. Opret `.planning/phases/NN-name/VERIFICATION.md` med dokumentation
-3. Luk GitHub issue for fasen:
+3. Luk fasens milestone:
    ```bash
-   gh issue close <nummer> --comment "Fase N afsluttet. Se VERIFICATION.md for dokumentation."
+   gh api repos/{owner}/{repo}/milestones/{nummer} -X PATCH -f state=closed
    ```

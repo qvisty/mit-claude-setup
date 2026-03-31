@@ -2,6 +2,7 @@
 """
 todo-github-sync.py
 Syncer TODO-kommentarer i koden til GitHub Issues automatisk.
+Tildeler nye issues til den aktive milestone (åben, med "Fase" i titlen).
 
 Brug:
   python3 .claude/hooks/todo-github-sync.py
@@ -45,6 +46,35 @@ def check_prereqs():
         return repo
     except Exception:
         return None
+
+
+def get_active_milestone():
+    """Finder den aktive milestone (åben, med 'Fase' i titlen). Returnerer nummer eller None."""
+    try:
+        milestones = json.loads(
+            run("gh api repos/{owner}/{repo}/milestones --jq '.' 2>/dev/null || echo '[]'", check=False)
+            or "[]"
+        )
+    except Exception:
+        milestones = []
+
+    if not milestones:
+        # Fallback: brug gh direkte
+        try:
+            result = run(
+                "gh api repos/{owner}/{repo}/milestones -q '[.[] | select(.state==\"open\")] | sort_by(.number) | last | .number'",
+                check=False,
+            )
+            return int(result) if result and result.isdigit() else None
+        except Exception:
+            return None
+
+    open_milestones = [m for m in milestones if m.get("state") == "open"]
+    if not open_milestones:
+        return None
+
+    # Returnér den senest oprettede åbne milestone
+    return max(open_milestones, key=lambda m: m.get("number", 0)).get("number")
 
 
 def scan_todos():
@@ -94,7 +124,7 @@ def ensure_label():
     )
 
 
-def create_issue(todo):
+def create_issue(todo, milestone_num=None):
     body = (
         "**Auto-oprettet fra kode-TODO**\n\n"
         f"Fil: `{todo['file']}:{todo['line']}`\n\n"
@@ -103,21 +133,24 @@ def create_issue(todo):
         "*Synket af [qvisty/mit-claude-setup](https://github.com/qvisty/mit-claude-setup)*"
     )
     title = todo["text"]
-    result = run(
+    cmd = (
         f"gh issue create "
         f"--title {json.dumps(title)} "
         f"--body {json.dumps(body)} "
         f"--label {json.dumps(LABEL)} "
-        f"--json number -q .number",
-        check=False,
     )
+    if milestone_num:
+        cmd += f"--milestone {milestone_num} "
+    cmd += "--json number -q .number"
+
+    result = run(cmd, check=False)
     return int(result) if result.isdigit() else None
 
 
 def close_issue(num):
     run(
         f"gh issue close {num} "
-        f"--comment \"Automatisk lukket: TODO er fjernet fra koden ✅\"",
+        f"--comment \"Automatisk lukket: TODO er fjernet fra koden\"",
         check=False,
     )
 
@@ -131,6 +164,12 @@ def main():
     print(f"[todo-sync] Repo: {repo}")
     ensure_label()
 
+    milestone = get_active_milestone()
+    if milestone:
+        print(f"[todo-sync] Aktiv milestone: #{milestone}")
+    else:
+        print("[todo-sync] Ingen aktiv milestone fundet — issues oprettes uden milestone")
+
     cache = load_cache()
     current = scan_todos()
 
@@ -140,14 +179,14 @@ def main():
         issue_num = cache[key].get("issue")
         if issue_num:
             close_issue(issue_num)
-            print(f"[todo-sync] Lukket #{ issue_num}: {cache[key].get('text', '')[:60]}")
+            print(f"[todo-sync] Lukket #{issue_num}: {cache[key].get('text', '')[:60]}")
         del cache[key]
 
     # Opret issues for nye TODOs
     new_keys = set(current.keys()) - set(cache.keys())
     for key in new_keys:
         todo = current[key]
-        issue_num = create_issue(todo)
+        issue_num = create_issue(todo, milestone)
         cache[key] = {**todo, "issue": issue_num}
         if issue_num:
             print(f"[todo-sync] Oprettet #{issue_num}: {todo['text'][:60]}")

@@ -152,11 +152,22 @@ git add -A
 git commit -m "Initialt setup med AI-konfiguration"
 ```
 
-## Trin 7 — Opret GitHub repo og push
+## Trin 7 — Opret GitHub repo, milestone og issues
 
 ```bash
+# Opret repo og push
 gh repo create my-project --private --source=. --push
+
+# Opret milestone for fase 1
+gh api repos/{owner}/{repo}/milestones \
+  -f title="Fase 1: [Fasenavn]" -f state=open \
+  -f description="$(cat .planning/phases/01-setup/PLAN.md)"
+
+# Opret issues for tasks i planen
+gh issue create --title "Task: [Tasknavn]" --milestone "Fase 1: [Fasenavn]"
 ```
+
+Milestone-progress viser automatisk hvor langt fasen er. TODO-kommentarer i koden oprettes automatisk som issues tildelt den aktive milestone.
 
 ## Trin 8 — Start Claude Code
 

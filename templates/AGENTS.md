@@ -107,27 +107,32 @@ Rettet race condition i checkout når bruger klikker hurtigt
 
 ---
 
-## 6. GITHUB ISSUES — FASESPORING
+## 6. GITHUB MILESTONES OG ISSUES
 
-Issues bruges **kun** på faseniveau — én issue pr. fase. Individuelle tasks spores ikke som issues.
+Faser spores som **milestones**. Tasks inden for en fase spores som **issues** tilknyttet den milestone.
 
 ### Ved fase-start
 
 ```bash
-# Opret label hvis den ikke eksisterer
-gh label create "phase" --color "0075ca" --description "Fasesporing" 2>/dev/null || true
+# Opret milestone for fasen
+gh api repos/{owner}/{repo}/milestones -f title="Fase N: [Fasenavn]" -f state=open \
+  -f description="$(cat .planning/phases/NN-name/PLAN.md)"
 
-# Opret issue for fasen
-gh issue create \
-  --title "Fase N: [Fasenavn]" \
-  --body "$(cat .planning/phases/NN-name/PLAN.md)" \
-  --label "phase"
+# Opret issues for hver task i planen
+gh issue create --title "Task: [Tasknavn]" --milestone "Fase N: [Fasenavn]"
 ```
+
+### Under fasen
+
+- Nye issues (inkl. auto-oprettede fra TODO-kommentarer) tildeles den aktive milestone
+- Milestone-progress viser automatisk hvor langt fasen er
+- Luk issues efterhånden som tasks færdiggøres
 
 ### Ved fase-afslutning
 
 ```bash
-gh issue close <nummer> --comment "Fase N afsluttet. Se VERIFICATION.md for dokumentation."
+# Luk milestone (alle issues skal være lukkede først)
+gh api repos/{owner}/{repo}/milestones/{nummer} -X PATCH -f state=closed
 ```
 
 ---

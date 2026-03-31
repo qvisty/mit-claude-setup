@@ -79,11 +79,15 @@ Følg formatet fra AGENTS.md sektion 7:
    git add -A
    git commit -m "Initialt setup med AI-konfiguration"
 
-## Trin 6 — Opret GitHub repo og issue
+## Trin 6 — Opret GitHub repo, milestone og issues
 
 gh repo create [projektnavn] --private --source=. --push
-gh label create "phase" --color "0075ca" --description "Fasesporing" 2>/dev/null || true
-gh issue create --title "Fase 1: [fasenavn]" --body "$(cat .planning/phases/01-setup/PLAN.md)" --label "phase"
+
+Opret en milestone for fase 1:
+gh api repos/{owner}/{repo}/milestones -f title="Fase 1: [fasenavn]" -f state=open -f description="$(cat .planning/phases/01-setup/PLAN.md)"
+
+Opret issues for hver task i planen og tildel dem til milestone:
+gh issue create --title "Task: [tasknavn]" --milestone "Fase 1: [fasenavn]"
 
 ## Trin 7 — Begynd implementering
 

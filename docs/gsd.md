@@ -83,14 +83,15 @@ GSD bruger den samme `.planning/`-struktur som resten af setupmet:
 
 GSD opdaterer STATE.md automatisk når faser afsluttes.
 
-### GitHub Issues-integration
+### GitHub Milestones og Issues
 
-GSD bruger GitHub Issues til fasesporing (se AGENTS.md sektion 6):
+GSD bruger GitHub Milestones til fasesporing (se AGENTS.md sektion 6):
 
-- Ved fase-start: `gh issue create --title "Fase N: [Navn]" --body "$(cat PLAN.md)" --label "phase"`
-- Ved fase-afslutning: `gh issue close <nummer>` med opsummerende kommentar
+- **Fase-start:** Opret en milestone for fasen + issues for hver task i planen
+- **Under fasen:** Issues lukkes efterhånden som tasks færdiggøres — milestone-progress opdateres automatisk
+- **Fase-afslutning:** Luk milestone når alle issues er lukkede
 
-TODO-kommentarer i koden synces desuden automatisk til GitHub Issues via post-commit hook. Se [Filer og sammenhæng](/docs/filer-og-sammenhaeng#synkronisering-med-github-issues) for detaljer.
+TODO-kommentarer i koden oprettes automatisk som issues tildelt den aktive milestone. Se [Filer og sammenhæng](/docs/filer-og-sammenhaeng#synkronisering-med-github) for detaljer.
 
 ## GSD i CLAUDE.md
 

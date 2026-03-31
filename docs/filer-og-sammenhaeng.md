@@ -143,11 +143,39 @@ Alt skal vise `[ok]`. Ret fejl inden du begynder at kode.
 - **Rør sjældent** PROJECT.md, agents.md og settings.json
 - Kør **altid** `bash sync.sh` efter ændringer i MD-filer
 
-## Synkronisering med GitHub Issues
+## Synkronisering med GitHub
 
-Dit lokale projekt holdes i sync med GitHub Issues på to niveauer:
+Dit lokale projekt holdes i sync med GitHub via **milestones** og **issues**.
 
-### Automatisk: TODO-kommentarer → GitHub Issues
+### Struktur: Milestones = Faser, Issues = Tasks
+
+```
+GitHub Milestone: "Fase 1: Auth og database"     ← fasens overordnede mål
+    │
+    ├── Issue: "Opsæt database-schema"            ← manuelt oprettet task
+    ├── Issue: "Implementér login-endpoint"       ← manuelt oprettet task
+    ├── Issue: "implement refresh token support"  ← auto-oprettet fra TODO
+    └── Issue: "add rate limiting"                ← auto-oprettet fra TODO
+```
+
+Milestone-progress viser automatisk hvor langt fasen er (baseret på åbne/lukkede issues).
+
+### Faser som milestones (se AGENTS.md sektion 6)
+
+```bash
+# Ved fase-start: opret milestone
+gh api repos/{owner}/{repo}/milestones \
+  -f title="Fase N: [Fasenavn]" -f state=open \
+  -f description="$(cat .planning/phases/NN-name/PLAN.md)"
+
+# Opret issues for tasks i planen
+gh issue create --title "Task: [Tasknavn]" --milestone "Fase N: [Fasenavn]"
+
+# Ved fase-afslutning: luk milestone
+gh api repos/{owner}/{repo}/milestones/{nummer} -X PATCH -f state=closed
+```
+
+### Automatisk: TODO-kommentarer → Issues
 
 Når du skriver en TODO i koden:
 
@@ -156,7 +184,7 @@ Når du skriver en TODO i koden:
 # TODO(auth): add rate limiting to login endpoint
 ```
 
-...oprettes der automatisk et GitHub Issue med label `todo-sync`. Når du fjerner TODO'en, lukkes issue automatisk.
+...oprettes der automatisk et GitHub Issue med label `todo-sync`, tildelt den aktive milestone. Når du fjerner TODO'en, lukkes issue automatisk.
 
 **Hvordan det virker:**
 
@@ -167,8 +195,9 @@ git commit
             │
             └── todo-github-sync.py
                     │
+                    ├── Finder aktiv milestone (seneste åbne)
                     ├── Scanner alle trackede filer for TODO-kommentarer
-                    ├── Ny TODO? → gh issue create (label: todo-sync)
+                    ├── Ny TODO? → gh issue create + tildel milestone
                     ├── Fjernet TODO? → gh issue close
                     └── Gemmer mapping i .claude/todo-issues.json
 ```
@@ -178,24 +207,6 @@ Kører automatisk efter hvert commit. Kan også køres manuelt:
 ```bash
 python3 .claude/hooks/todo-github-sync.py
 ```
-
-### Manuelt: Faser → GitHub Issues
-
-Hver fase i projektet spores som ét GitHub Issue med label `phase` (se AGENTS.md sektion 6):
-
-```bash
-# Ved fase-start
-gh label create "phase" --color "0075ca" --description "Fasesporing" 2>/dev/null || true
-gh issue create \
-  --title "Fase N: [Fasenavn]" \
-  --body "$(cat .planning/phases/NN-name/PLAN.md)" \
-  --label "phase"
-
-# Ved fase-afslutning
-gh issue close <nummer> --comment "Fase N afsluttet. Se VERIFICATION.md for dokumentation."
-```
-
-**Vigtigt:** Issues bruges kun på faseniveau — én issue pr. fase. Individuelle tasks spores i PLAN.md, ikke som issues.
 
 ### Forudsætninger for sync
 
