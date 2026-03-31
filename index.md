@@ -41,4 +41,3 @@ Dette repo fungerer som:
 - [Ralph](/docs/ralph) — fire-and-forget agent via Ralphify
 - [Claude Code](/docs/claude-code) — arbejde med Claude Code CLI
 - [Codex](/docs/codex) — arbejde med OpenAI Codex
-- [Arbejdsgange](/docs/workflows) — mine typiske flows og mønstre
