@@ -62,23 +62,21 @@ Ralph læser RALPH.md, følger AGENTS.md-reglerne, og arbejder sig igennem TODO-
 
 ## Ralphs workflow
 
-Ralph følger denne rækkefølge ved hver opgave:
+Ralph følger AGENTS.md sektion 8 (Implementering):
 
 1. Læs STATE.md og identificér nuværende fase
 2. Find eller opret PLAN.md i fasemappen
-3. Skriv fejlende test først (rød fase)
-4. Implementér til testen er grøn
-5. Refaktor
-6. Commit med naturlig, forklarende besked
-7. Push til main (kun når tests er grønne)
-8. Opdatér TODO-listen i RALPH.md
+3. Skriv fejlende test først → implementér → refaktor
+4. Commit med naturlig, forklarende besked
+5. Opdatér TODO-listen i RALPH.md
+
+For Definition of Done, se AGENTS.md sektion 9.
 
 ## Ralphs begrænsninger
 
+Ralph følger begrænsningerne i AGENTS.md sektion 5 (Git og GitHub). Derudover:
 - Spørger altid før han sletter filer
-- Pusher aldrig med `--force`
-- Pusher aldrig midt i en TDD-cyklus (rød fase)
-- Følger AGENTS.md for alle regler han er i tvivl om
+- For usikkerhed om regler: se AGENTS.md
 
 ## Ralph vs. Claude Code
 

@@ -47,7 +47,7 @@
 **Brug:** Commits, branching og PR-tekster  
 **Instruktioner:**
 - Følg commit-format fra CLAUDE.md: menneskelig, forklarende tekst
-- Opret altid feature-branches — push aldrig direkte til main
+- Foretræk feature-branches — direkte push til main er tilladt for små rettelser
 - Gruppér relaterede ændringer i logiske commits
 - PR-beskrivelser: kort Summary + Test plan
 

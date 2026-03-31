@@ -75,7 +75,8 @@ Regler der gælder for AL kode i projektet:
 
 ### Branch-strategi
 
-Direkte på `main`. Ingen feature-branches. Ingen pull requests.
+Foretræk feature-branches til nye features og større ændringer.
+Direkte push til `main` er tilladt for små rettelser og hurtige fixes.
 
 ### Commit-beskeder
 

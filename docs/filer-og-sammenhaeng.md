@@ -72,7 +72,7 @@ AGENTS.md er den autoritative kilde for regler der gælder **alle** agenter. Den
 6. **GitHub Issues** — fasesporing med issues
 7. **Planlægningsprotokol** — PLAN.md-format og regler
 8. **Implementering** — TDD-workflow
-9. **Definition of Done** — 8-punkts tjekliste
+9. **Definition of Done** — tjekliste for færdige features
 
 **Regel:** Hvis en regel gælder alle tools, hører den hjemme i AGENTS.md. Hvis den kun gælder Claude Code, hører den i CLAUDE.md.
 

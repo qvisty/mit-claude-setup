@@ -3,7 +3,6 @@
 <!--
   Ralphs operative fil.
   Beholder sin egen TODO-liste og workflow.
-  Tilføjer krydsreferencer til den fælles protokol ved faseskift.
   For fulde regler: se AGENTS.md.
 -->
 
@@ -14,7 +13,7 @@
 ## Kontekst
 
 Læs inden du starter:
-1. `AGENTS.md` — universal protokol (regler, kodeks, git, DoD)
+1. `AGENTS.md` — universal protokol (regler, kodeks, git, Definition of Done)
 2. `.planning/STATE.md` — nuværende fase og næste skridt
 3. `.planning/PROJECT.md` — requirements og beslutninger
 
@@ -29,9 +28,6 @@ npx tsc --noEmit
 
 # Lint
 npx biome check .
-
-# Push
-git push origin main
 ```
 
 ## TODO-liste (denne session)
@@ -48,46 +44,22 @@ git push origin main
 
 ## Prioritering
 
-Ved hver opgave:
+Ved hver opgave følges AGENTS.md sektion 8 (Implementering):
 
 1. Læs STATE.md og identificér nuværende fase
-2. Opret eller find PLAN.md i fasemappen
-3. Skriv fejlende test først (rød fase)
-4. Implementér til testen er grøn
-5. Refaktorer
-6. Commit med **naturlig, forklarende besked** (se AGENTS.md sektion 5 for eksempler)
-7. Push til main: `git push origin main` — kun når tests er grønne
-8. Opdatér TODO-listen i denne fil
-
-## Definition of Done
-
-En task er færdig når:
-
-- [ ] Funktionen virker og edge cases er håndteret
-- [ ] Sikkerhedsaspekt er gennemtænkt
-- [ ] ALT brugerinput valideret med Zod
-- [ ] Tests grønne: `npm run test -- --run`
-- [ ] TypeScript rent: `npx tsc --noEmit`
-- [ ] Biome linting rent: `npx biome check .`
-- [ ] Kode committet med naturlig, forklarende besked (se AGENTS.md sektion 5)
-- [ ] Kode og RALPH.md committet i samme commit
-- [ ] Kode er pushet til main: `git push origin main`
+2. Find eller opret PLAN.md i fasemappen
+3. Skriv fejlende test først → implementér → refaktor
+4. Commit med naturlig, forklarende besked (se AGENTS.md sektion 5)
+5. Opdatér TODO-listen i denne fil
 
 ## Når en hel fase er færdig
 
-Når alle checkboxes i TODO-listen er markeret:
+Se AGENTS.md sektion 9 (Definition of Done) for den fulde tjekliste.
 
+Derudover:
 1. Opdatér `.planning/STATE.md` med ny fasestatus og `Resume file:`
-2. Opret `.planning/phases/NN-name/VERIFICATION.md` med dokumentation for succeskriterier
+2. Opret `.planning/phases/NN-name/VERIFICATION.md` med dokumentation
 3. Luk GitHub issue for fasen:
    ```bash
    gh issue close <nummer> --comment "Fase N afsluttet. Se VERIFICATION.md for dokumentation."
    ```
-4. Tilføj krydsreference i RALPH.md til næste fases kontekstfil
-
-## Begrænsninger
-
-- Spørg altid før du sletter filer
-- Push aldrig med `--force`
-- Push aldrig midt i en TDD-cyklus (rød fase)
-- For usikkerhed om regler: se AGENTS.md

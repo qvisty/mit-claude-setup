@@ -20,9 +20,7 @@
     "deny": [
       "Bash(git push --force*)",
       "Bash(git reset --hard*)",
-      "Bash(rm -rf*)",
-      "Bash(git push origin main*)",
-      "Bash(git push origin master*)"
+      "Bash(rm -rf*)"
     ]
   },
   "hooks": {
