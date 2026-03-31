@@ -72,6 +72,15 @@ Ralph følger AGENTS.md sektion 8 (Implementering):
 
 For Definition of Done, se AGENTS.md sektion 9.
 
+### GitHub Issues-integration
+
+Ralph bruger GitHub Issues på to niveauer:
+
+- **TODO-sync:** Når Ralph skriver `TODO:`-kommentarer i koden, oprettes GitHub Issues automatisk via post-commit hook
+- **Fasesporing:** Når en fase er færdig, lukker Ralph det tilhørende GitHub Issue (se AGENTS.md sektion 6 og "Når en hel fase er færdig" i RALPH.md)
+
+Se [Filer og sammenhæng](/docs/filer-og-sammenhaeng#synkronisering-med-github-issues) for det fulde overblik.
+
 ## Ralphs begrænsninger
 
 Ralph følger begrænsningerne i AGENTS.md sektion 5 (Git og GitHub). Derudover:

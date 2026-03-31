@@ -89,6 +89,15 @@ test-driven-development → requesting-code-review
 
 **De komplementerer hinanden:** GSD styrer den overordnede fasestruktur, Superpowers styrer kvaliteten af det arbejde der udføres inden for hver fase.
 
+## GitHub Issues-integration
+
+Superpowers arver GitHub Issues-integrationen fra det fælles setup:
+
+- **TODO-sync:** Når Superpowers skriver `TODO:`-kommentarer i koden under TDD, oprettes der automatisk GitHub Issues via post-commit hook
+- **Fasesporing:** Når en fase afsluttes, lukkes det tilhørende GitHub Issue (se AGENTS.md sektion 6)
+
+Se [Filer og sammenhæng](/docs/filer-og-sammenhaeng#synkronisering-med-github-issues) for det fulde overblik.
+
 ## Tips
 
 - **Lad Superpowers styre** — undgå at override skills med manuelle instruktioner
