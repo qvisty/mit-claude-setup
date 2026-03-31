@@ -69,7 +69,7 @@ AGENTS.md er den autoritative kilde for regler der gælder **alle** agenter. Den
 3. **Systemregler** — forretningsinvarianter der aldrig brydes
 4. **Kodekodeks** — kodestandarder (engelsk, docstrings, Zod, ingen `any`)
 5. **Git og GitHub** — branch-strategi, commit-format, push-regler
-6. **GitHub Issues** — fasesporing med issues
+6. **GitHub Milestones og Issues** — fasesporing med milestones, tasks som issues
 7. **Planlægningsprotokol** — PLAN.md-format og regler
 8. **Implementering** — TDD-workflow
 9. **Definition of Done** — tjekliste for færdige features

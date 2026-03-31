@@ -48,33 +48,19 @@ def check_prereqs():
         return None
 
 
-def get_active_milestone():
-    """Finder den aktive milestone (åben, med 'Fase' i titlen). Returnerer nummer eller None."""
+def get_active_milestone(repo):
+    """Finder den aktive milestone (seneste åbne). Returnerer nummer eller None."""
     try:
-        milestones = json.loads(
-            run("gh api repos/{owner}/{repo}/milestones --jq '.' 2>/dev/null || echo '[]'", check=False)
-            or "[]"
-        )
+        result = run(f"gh api repos/{repo}/milestones?state=open", check=False)
+        milestones = json.loads(result) if result else []
     except Exception:
-        milestones = []
+        return None
 
     if not milestones:
-        # Fallback: brug gh direkte
-        try:
-            result = run(
-                "gh api repos/{owner}/{repo}/milestones -q '[.[] | select(.state==\"open\")] | sort_by(.number) | last | .number'",
-                check=False,
-            )
-            return int(result) if result and result.isdigit() else None
-        except Exception:
-            return None
-
-    open_milestones = [m for m in milestones if m.get("state") == "open"]
-    if not open_milestones:
         return None
 
     # Returnér den senest oprettede åbne milestone
-    return max(open_milestones, key=lambda m: m.get("number", 0)).get("number")
+    return max(milestones, key=lambda m: m.get("number", 0)).get("number")
 
 
 def scan_todos():
@@ -164,7 +150,7 @@ def main():
     print(f"[todo-sync] Repo: {repo}")
     ensure_label()
 
-    milestone = get_active_milestone()
+    milestone = get_active_milestone(repo)
     if milestone:
         print(f"[todo-sync] Aktiv milestone: #{milestone}")
     else:

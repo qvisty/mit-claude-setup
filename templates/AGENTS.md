@@ -39,7 +39,7 @@ Ingen kode skrives eller planlægges før disse tre filer er læst.
 | Linting | Biome | `<!-- udfyld -->` |
 
 **Next.js-advarsel:** Stol ikke på træningsdata om Next.js API-syntaks.
-Læs `node_modules/next/dist/docs/` eller brug `mcp__77cd43a5__query-docs` før du skriver kode.
+Konsultér altid den officielle dokumentation eller projektets `node_modules/next/` før du skriver Next.js-kode.
 
 ---
 
@@ -213,4 +213,4 @@ En feature er **kun** færdig når alle punkter er opfyldt:
 
 1. Opdatér `.planning/STATE.md` med ny fasestatus og `Resume file:`
 2. Opret `.planning/phases/NN-name/VERIFICATION.md` med dokumentation for succeskriterier
-3. Luk GitHub issue for fasen med opsummerende kommentar
+3. Luk fasens milestone: `gh api repos/{owner}/{repo}/milestones/{nummer} -X PATCH -f state=closed`

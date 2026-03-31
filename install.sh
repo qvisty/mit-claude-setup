@@ -2,13 +2,13 @@
 # install.sh — Bootstrap qvisty's AI-setup i et nyt projekt
 #
 # Opretter:
-#   CLAUDE.md              → master-konfiguration (Claude Code, GSD, Superpowers, MCP Codex)
-#   AGENTS.md              → Codex CLI-konfiguration (synces fra CLAUDE.md)
+#   CLAUDE.md              → master-konfiguration (Claude Code, GSD, Superpowers)
+#   AGENTS.md              → universel protokol (selvstændig fil)
 #   RALPH.md               → Ralphify-konfiguration
 #   .claude/agents.md      → Subagent-roller
 #   .claude/settings.json  → Tilladelser og hooks
-#   .claude/hooks/         → TODO-sync og session-start
-#   sync.sh                → Sync CLAUDE.md → AGENTS.md
+#   .claude/hooks/         → TODO-sync, commit-msg og post-commit hooks
+#   sync.sh                → Validerer at alle filer er korrekt konfigureret
 #
 # Brug:
 #   curl -fsSL https://raw.githubusercontent.com/qvisty/mit-claude-setup/main/install.sh | bash
