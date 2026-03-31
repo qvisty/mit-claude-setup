@@ -143,6 +143,66 @@ Alt skal vise `[ok]`. Ret fejl inden du begynder at kode.
 - **Rør sjældent** PROJECT.md, agents.md og settings.json
 - Kør **altid** `bash sync.sh` efter ændringer i MD-filer
 
+## Synkronisering med GitHub Issues
+
+Dit lokale projekt holdes i sync med GitHub Issues på to niveauer:
+
+### Automatisk: TODO-kommentarer → GitHub Issues
+
+Når du skriver en TODO i koden:
+
+```python
+# TODO: implement refresh token support
+# TODO(auth): add rate limiting to login endpoint
+```
+
+...oprettes der automatisk et GitHub Issue med label `todo-sync`. Når du fjerner TODO'en, lukkes issue automatisk.
+
+**Hvordan det virker:**
+
+```
+git commit
+    │
+    └── post-commit hook
+            │
+            └── todo-github-sync.py
+                    │
+                    ├── Scanner alle trackede filer for TODO-kommentarer
+                    ├── Ny TODO? → gh issue create (label: todo-sync)
+                    ├── Fjernet TODO? → gh issue close
+                    └── Gemmer mapping i .claude/todo-issues.json
+```
+
+Kører automatisk efter hvert commit. Kan også køres manuelt:
+
+```bash
+python3 .claude/hooks/todo-github-sync.py
+```
+
+### Manuelt: Faser → GitHub Issues
+
+Hver fase i projektet spores som ét GitHub Issue med label `phase` (se AGENTS.md sektion 6):
+
+```bash
+# Ved fase-start
+gh label create "phase" --color "0075ca" --description "Fasesporing" 2>/dev/null || true
+gh issue create \
+  --title "Fase N: [Fasenavn]" \
+  --body "$(cat .planning/phases/NN-name/PLAN.md)" \
+  --label "phase"
+
+# Ved fase-afslutning
+gh issue close <nummer> --comment "Fase N afsluttet. Se VERIFICATION.md for dokumentation."
+```
+
+**Vigtigt:** Issues bruges kun på faseniveau — én issue pr. fase. Individuelle tasks spores i PLAN.md, ikke som issues.
+
+### Forudsætninger for sync
+
+- GitHub CLI (`gh`) installeret og autentificeret: `gh auth login`
+- Git repo med GitHub remote konfigureret
+- Hooks installeret (sker automatisk via `install.sh`)
+
 ### 3. Typiske fejl
 
 | Problem | Årsag | Løsning |
@@ -152,3 +212,5 @@ Alt skal vise `[ok]`. Ret fejl inden du begynder at kode.
 | Codex CLI følger ikke reglerne | AGENTS.md er ikke synced | Kør `bash sync.sh` |
 | Ralph gør noget uventet | RALPH.md mangler kontekst | Tilføj link til AGENTS.md og STATE.md i RALPH.md |
 | sync.sh fejler | En sektion mangler i AGENTS.md | Tjek at alle 9 sektioner er til stede |
+| TODO-sync opretter ikke issues | `gh` mangler eller ikke autentificeret | Kør `gh auth login` |
+| TODO-sync opretter duplikater | Cache-filen er slettet | Slet ikke `.claude/todo-issues.json` |
